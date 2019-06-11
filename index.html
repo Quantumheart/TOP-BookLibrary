@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>To Read List</title>
+</head>
+
+<body>
+    <header>
+        <div class="bg-dark collapse" id="navbarHeader">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-md-7 py-4">
+                        <h4 class="text-white">About</h4>
+                        <p class="text-muted">Software developer with a passion for technology, art, and beer.</p>
+                    </div>
+                    <div class="col-sm-4 offset-md-1 py-4">
+                        <h4 class="text-white">Contact</h4>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a class="nav-link" href="mailto:cody.mumford9106@hotmail.com"><i
+                                        class="fas fa-envelope-square"></i></a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="http://github.com/cody-mumford9106"><i
+                                        class="fab fa-github-alt"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://twitter.com/Cody_Mumford"><i
+                                        class="fab fa-twitter"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://www.linkedin.com/in/cody-mumford-96b078158/"><i
+                                        class="fab fa-linkedin-in"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar navbar-dark bg-dark shadow-sm">
+            <div class="container d-flex justify-between">
+                <a class="navbar-brand" href="index.html">
+                    <img src="Images/CODYCODESIcon.gif" alt="Cody Mumford" width="48" height="32" />
+                </a>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                    data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-md-8" onload="createBookCard(myLibrary)" id="cards">
+                <h3>To Read List: </h3>
+            </div>
+<!--        </div>
+    </div>
+    <div class="container">
+        <div class="row">-->
+            <div class="col justify-content-center">
+
+                <form id="bookForm">
+                        <h4>Add a Book to the Library!</h4>
+                    <div class="form-group">
+                        <input name="title" type="text" id="titleField" placeholder="Title" required>
+                    </div>
+                    <div class="form-group">
+                        <input name="author" type="text" id="authorField" placeholder="Author" required>
+                    </div>
+                    <div class="form-group">
+                        <input name="pages" type="number" id="numPagesField" placeholder="Number of Pages" min="1" max="10000" required>
+                    </div>
+                    <div class="form-check">
+                        <input name="read" type="checkbox" class="form-check-input" id="readCheck" value="read">
+                        <label class="form-check-label" for="readCheck">Read?</label>
+                    </div>
+                    <button type="submit" onclick="addBookToLibrary()" class="btn btn-primary">Add Book</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <script src="firebase.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
