@@ -1,3 +1,5 @@
+'use strict';
+
 let myLibrary = [];
 
 class Book {
@@ -8,57 +10,47 @@ class Book {
         this.read = read;
     }
 
-    isRead() {
-        this.read = !this.read;
-    }
 }
 
 
 function addBookToLibrary(book) {
     myLibrary.unshift(book);
-    myLibrary.splice(1, 1);
+    console.dir(book);
 }
 
-
 function deleteBookFromLibrary(index) {
-    alert("The book at index : " + index + "has been deleted.");
+    alert('The book at index : ' + index + ' has been deleted.');
     myLibrary.splice(index, 1);
 }
 
+const addBook = document.getElementById('addBook');
 
 
-const bookForm = document.getElementById('bookForm');
+addBook.addEventListener('click', (e) => {
 
-bookForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const {
-        title,
-        author,
-        pages,
-        read
-    } = bookForm
+    let bookTitle = document.getElementById('titleField').value;
+    let bookAuthor = document.getElementById('authorField').value;
+    let bookPages = document.getElementById('numPagesField').value;
+    let bookRead = document.getElementById('readCheck').value;
     addBookToLibrary(
         new Book(
-            title.value,
-            author.value,
-            pages.value,
-            read.value == 'read' ? true : false
+            bookTitle,
+            bookAuthor,
+            bookPages,
+            bookRead
         )
-
     );
 
-    // clears form
-    [title, author, pages].forEach(input => {
-        input.value = '';
-    });
     createBookCard(myLibrary);
+    const bookForm = document.getElementById('bookForm');
+    bookForm.reset();
 });
 
-addBookToLibrary(new Book("Lord of the Rings: Fellowship of the Ring", "JR Tolkien", 412, false));
+//addBookToLibrary(new Book('Lord of the Rings: Fellowship of the Ring', 'JR Tolkien', 412, 'Read'));
 
-const cards = document.getElementById('cards');
-cards.addEventListener("load", createBookCard(myLibrary));
-
+const bookList = document.getElementById('bookList');
+bookList.addEventListener('load', createBookCard(myLibrary));
 
 function createBookCard(myLibrary) {
     myLibrary.forEach(book => {
@@ -70,16 +62,56 @@ function createBookCard(myLibrary) {
 
         const h5 = document.createElement('h5');
         h5.setAttribute('class', 'card-title');
+        h5.setAttribute('id', 'bookTitle');
         h5.innerHTML = book.title;
 
         const info = document.createElement('p');
         info.setAttribute('class', 'card-text justify-content-center');
-        info.innerHTML = "Author: " + book.author + "<br>" + " Pages: " + book.pages + "<br>" + "Read: " + book.read;
+        info.innerHTML = 'Author: ' + book.author + '<br>' + ' Pages: ' + book.pages;
 
-        cards.appendChild(card);
+        const deleteButton = document.createElement('button');
+        deleteButton.setAttribute('type', 'button');
+        deleteButton.setAttribute('class', 'btn btn-outline-danger btn-sm');
+        deleteButton.setAttribute('id', 'deleteBook');
+        deleteButton.innerHTML = 'Delete Book';
+
+        let readButton = document.createElement('button');
+        readButton.setAttribute('type', 'button');
+        readButton.setAttribute('class', 'btn btn-outline-primary btn-sm');
+        readButton.setAttribute('id', 'readBook');
+        readButton.innerHTML = book.read;
+
+        bookList.appendChild(card);
         card.appendChild(cardBody);
         cardBody.appendChild(h5);
         cardBody.appendChild(info);
+        cardBody.appendChild(deleteButton);
+        cardBody.appendChild(readButton);
     });
 
 }
+
+
+// event listener for the bookList
+// method finds the corresponding book title and saves and index from it to then use that for finding the 
+// correct element of the myLibrary array
+bookList.addEventListener('click', function (e) {
+    // finds the book by title
+    let titleToFind = document.querySelector('#bookTitle').innerHTML;
+    const index = myLibrary.indexOf(myLibrary.find(book => book.title === titleToFind));
+    if (e.target.id === 'deleteBook') {
+        console.dir(index);
+        deleteBookFromLibrary(index);
+        e.target.parentNode.remove();
+    }
+
+    if (e.target.id === 'readBook') {
+        if (e.target.innerHTML == 'Read') {
+            
+            e.target.innerHTML = 'Not Read';
+        } else {
+            e.target.innerHTML = 'Read';
+        }
+    }
+
+});

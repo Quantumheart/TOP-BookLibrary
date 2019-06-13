@@ -3,3 +3,18 @@
     padding: .5rem 1rem;
     float: left;
 }
+
+#cards 
+{
+    margin: 1rem;
+}
+
+#bookForm
+{
+    margin: 1rem;
+}
+
+.button
+{
+    padding: .2rem;
+}
